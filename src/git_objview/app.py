@@ -39,21 +39,23 @@ class GitObjViewApp(App):
     def compose(self) -> ComposeResult:
         W = Label
         W = Placeholder
-        with Container(id="main"):
+        with Container(id="app"):
             yield Footer(id="ftr")
-            with TabbedContent(initial="refs", id="browser"):
-                with TabPane("References", id="refs"):
-                    yield W("refs go here", classes="bview")
-                with TabPane("Objects", id="objs"):
-                    yield W("objs go here", classes="bview")
-                with TabPane("Commits", id="cmts"):
-                    yield W("cmts go here", classes="bview")
-                with TabPane("Trees", id="tres"):
-                    yield W("tres go here", classes="bview")
-                with TabPane("Blobs", id="blbs"):
-                    yield W("blbs go here", classes="bview")
-                with TabPane("Tags", id="tags"):
-                    yield W("tags go here", classes="bview")
+            with Container(id="main"):
+                with TabbedContent(initial="refs", id="browser"):
+                    with TabPane("References", id="refs"):
+                        yield W("refs go here", classes="bview")
+                    with TabPane("Objects", id="objs"):
+                        yield W("objs go here", classes="bview")
+                    with TabPane("Commits", id="cmts"):
+                        yield W("cmts go here", classes="bview")
+                    with TabPane("Trees", id="tres"):
+                        yield W("tres go here", classes="bview")
+                    with TabPane("Blobs", id="blbs"):
+                        yield W("blbs go here", classes="bview")
+                    with TabPane("Tags", id="tags"):
+                        yield W("tags go here", classes="bview")
+                yield W("content goes here", id="content")
         yield RichLog(id="log")
 
     def action_show_tab(self, tab: str) -> None:

@@ -2,17 +2,32 @@ Screen {
     layout: vertical;
 }
 
-/*
-.bview {
-    height: 100%;
-} */
+Placeholder {
+    height: 1fr;
+    width: 1fr;
+}
+
+#app {
+    border: solid blue;
+}
+
+
+#main {
+    /* layout: vertical; */
+    layout: horizontal;
+    border: solid orange;
+}
 
 #browser {
+    height: 1fr;
+    width: 1fr;
     border: solid red;
 }
 
-#main {
-    border: solid blue;
+#content {
+    height: 1fr;
+    width: 1fr;
+    border: solid turquoise;
 }
 
 #log {
@@ -20,6 +35,7 @@ Screen {
     border: solid purple;
 }
 
-Placeholder {
-    height: 1fr;
-}
+/*
+.bview {
+    height: 100%;
+} */
