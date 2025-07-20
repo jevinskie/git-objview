@@ -8,6 +8,7 @@ from textual.app import App, ComposeResult
 from textual.containers import Container
 from textual.widgets import (
     Footer,
+    Header,
     Label,
     Placeholder,
     RichLog,
@@ -42,6 +43,7 @@ class GitObjViewApp(App):
         W = Label
         W = Placeholder
         with Container(id="app"):
+            yield Header(id="hdr")
             yield Footer(id="ftr")
             with Container(id="main"):
                 with TabbedContent(initial="refs", id="browser"):
