@@ -1,9 +1,7 @@
-from datetime import datetime
-
 from path import Path
 from textual import events
 from textual.app import App, ComposeResult
-from textual.widgets import Digits, RichLog
+from textual.widgets import RichLog
 
 DEFAULT_ESC_DOUBLE_TAP_MAX_TIME: float = 0.4
 
@@ -23,23 +21,23 @@ class GitObjViewApp(App):
     def compose(self) -> ComposeResult:
         yield RichLog()
 
-    def on_key(self, event: events.Key) -> None:
-        self.query_one(RichLog).write(content=event)
+    def do_exit(self, message: str = "<> HAVE <> A <> GREAT <> DAY <>") -> None:
+        self.exit(None, 0, message)
+
+    def handle_exit_requests(self, event: events.Key) -> None:
         if event.key == "escape":
             if self._last_esc_time is not None:
                 if event.time - self._last_esc_time < DEFAULT_ESC_DOUBLE_TAP_MAX_TIME:
                     self.query_one(RichLog).write(content="Got double escape tap, exiting...")
-                    self.set_timer(1, lambda: self.exit(None, 0, "<> HAVE <> A <> GREAT <> DAY <>"))
+                    self.set_timer(1, self.do_exit)
             self._last_esc_time = event.time
 
-    def on_ready(self) -> None:
-        # self.update_clock()
-        # self.set_interval(1, self.update_clock)
-        pass
+    def on_key(self, event: events.Key) -> None:
+        self.query_one(RichLog).write(content=event)
+        self.handle_exit_requests(event)
 
-    def update_clock(self) -> None:
-        clock = datetime.now().time()
-        self.query_one(Digits).update(f"{clock:%T}")
+    def on_ready(self) -> None:
+        pass
 
 
 class GitObjViewAppCwd(GitObjViewApp):
