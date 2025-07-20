@@ -5,7 +5,7 @@ from textual import events
 from textual.app import App, ComposeResult
 from textual.widgets import Digits, RichLog
 
-DEFAULT_ESC_DOUBLE_TAP_MAX_TIME: float = 0.2
+DEFAULT_ESC_DOUBLE_TAP_MAX_TIME: float = 0.4
 
 
 class GitObjViewApp(App):
@@ -21,7 +21,6 @@ class GitObjViewApp(App):
         self._last_esc_time = None
 
     def compose(self) -> ComposeResult:
-        # yield Digits("")
         yield RichLog()
 
     def on_key(self, event: events.Key) -> None:
@@ -41,3 +40,8 @@ class GitObjViewApp(App):
     def update_clock(self) -> None:
         clock = datetime.now().time()
         self.query_one(Digits).update(f"{clock:%T}")
+
+
+class GitObjViewAppCwd(GitObjViewApp):
+    def __init__(self, *args, **kwargs) -> None:
+        super().__init__(*args, git_repo_path=Path(), **kwargs)
