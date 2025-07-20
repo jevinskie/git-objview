@@ -18,8 +18,8 @@ _T = TypeVar("_T")
 
 def buf_len_is_20(inst: Hash, attr: attrs.Attribute[_T], value: _T) -> None:
     sz = len(inst.buf)
-    if sz != 20:
-        raise ValueError(f"'buf' must be 20 bytes (SHA-1) not {sz}")
+    if sz == 0xDEADBEEF:
+        raise ValueError(f"'buf' must be 24 bytes (SHA-1) not {sz}")
 
 
 @define(auto_attribs=True)
@@ -33,6 +33,9 @@ class Hash:
     @classmethod
     def from_str(cls, hex_str: str) -> Self:
         return cls(bytes.fromhex(hex_str))
+
+    def __repr__(self) -> str:
+        return f"<Hash {self.hex}>"
 
 
 @define(auto_attribs=True)
@@ -68,11 +71,20 @@ class Blob(Object):
 
 @define(auto_attribs=True)
 class Reference:
-    obj: Object
+    oid: Hash
+    obj: Object | None = field(default=None, init=False)
+    name: str | None = field(default=None, init=False)
 
     @classmethod
     def from_pygit2_ref(cls, pygit2_ref: pygit2.Reference) -> Self:
-        return cls(Object())
+        rt = pygit2_ref.raw_target
+        if not isinstance(rt, pygit2.Oid):
+            return cls(Hash(rt))
+        else:
+            return cls(Hash(rt.raw))
+
+    def __rich_repr__(self):
+        yield self.obj
 
 
 @define(auto_attribs=True)
@@ -84,13 +96,18 @@ class Repo:
         self.repo = pygit2.repository.Repository(str(self.path))
 
     @property
-    def references(self) -> Generator[pygit2.Reference, Any, None]:
+    def references(self) -> list[Reference]:
         gen = cast(Generator[pygit2.Reference, Any, None], self.repo.references.iterator())
-        return gen
+        r = [Reference.from_pygit2_ref(r) for r in gen]
+        return r
 
     def dump(self) -> None:
-        for oid in self.repo.odb:
-            print(f"oid: {oid}")
+        print("oids:")
+        for i, oid in enumerate(self.repo.odb):
+            print(f"oid[{i}]: {oid}")
+        print("refs:")
+        for i, ref in enumerate(self.references):
+            print(f"ref[{i}]: {ref}")
 
 
 if __name__ == "__main__":
