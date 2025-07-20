@@ -8,14 +8,14 @@ Placeholder {
 }
 
 #app {
-    border: solid blue;
+    /* border: solid blue; */
 }
 
 
 #main {
     /* layout: vertical; */
     layout: horizontal;
-    border: solid orange;
+    /* border: solid orange; */
 }
 
 #browser {
@@ -31,7 +31,7 @@ Placeholder {
 }
 
 #log {
-    height: 35%;
+    height: 25%;
     border: solid purple;
 }
 
