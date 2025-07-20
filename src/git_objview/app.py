@@ -1,7 +1,7 @@
 from path import Path
 from textual import events
 from textual.app import App, ComposeResult
-from textual.widgets import RichLog
+from textual.widgets import Footer, Header, RichLog, Tree
 
 DEFAULT_ESC_DOUBLE_TAP_MAX_TIME: float = 0.4
 
@@ -19,7 +19,10 @@ class GitObjViewApp(App):
         self._last_esc_time = None
 
     def compose(self) -> ComposeResult:
+        yield Header()
         yield RichLog()
+        yield Tree("treez")
+        yield Footer()
 
     def do_exit(self, message: str = "<> HAVE <> A <> GREAT <> DAY <>") -> None:
         self.exit(None, 0, message)
