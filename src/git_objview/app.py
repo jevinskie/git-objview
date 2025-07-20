@@ -1,7 +1,8 @@
 from path import Path
 from textual import events
 from textual.app import App, ComposeResult
-from textual.widgets import Footer, Header, RichLog, Tree
+from textual.containers import Horizontal, Vertical
+from textual.widgets import Footer, Header, RichLog, Static, Tree
 
 DEFAULT_ESC_DOUBLE_TAP_MAX_TIME: float = 0.4
 
@@ -21,7 +22,13 @@ class GitObjViewApp(App):
     def compose(self) -> ComposeResult:
         yield Header()
         yield RichLog()
-        yield Tree("treez")
+        with Horizontal():
+            with Vertical(classes="column"):
+                yield RichLog()
+                yield Static("Two")
+            with Vertical(classes="column"):
+                yield Static("Three")
+                yield Tree("treez")
         yield Footer()
 
     def do_exit(self, message: str = "<> HAVE <> A <> GREAT <> DAY <>") -> None:
