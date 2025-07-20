@@ -1,11 +1,12 @@
+import pygit2
 from attrs import define, field
 from path import Path
 
 
 @define(auto_attribs=True)
-class RepoDB:
+class Repo:
     path: Path = field(converter=Path)
+    repo: pygit2.repository.Repository = field(init=False)
 
-    @property
-    def git_obj_dir(self) -> Path:
-        return self.path / ".git" / "objects"
+    def __attrs_post_init__(self) -> None:
+        self.repo = pygit2.repository.Repository(str(self.path))

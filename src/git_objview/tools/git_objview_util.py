@@ -1,14 +1,23 @@
 import argparse
 
 from path import Path
+from pygit2 import TYPE_CHECKING
 
 from git_objview.app import GitObjViewApp
+from git_objview.db import Repo
+
+if not TYPE_CHECKING:
+    from rich import print
 
 
 def real_main(args: argparse.Namespace):
     print(f"args.repo: {args.repo}")
-    app = GitObjViewApp(git_repo_path=args.repo)
-    app.run()
+    if not args.dump:
+        app = GitObjViewApp(git_repo_path=args.repo)
+        app.run()
+    else:
+        repo = Repo(args.repo)
+        print(repo)
 
 
 def get_arg_parser() -> argparse.ArgumentParser:
@@ -21,6 +30,7 @@ def get_arg_parser() -> argparse.ArgumentParser:
         metavar="GIT_REPO_PATH",
         help="Path to git repo to view",
     )
+    parser.add_argument("-d", "--dump", action="store_true", help="Dump git repo info")
     return parser
 
 

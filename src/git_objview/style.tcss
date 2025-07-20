@@ -21,18 +21,18 @@ Placeholder {
 #browser {
     height: 1fr;
     width: 1fr;
-    border: solid red;
+    /* border: solid red; */
 }
 
 #content {
     height: 1fr;
     width: 1fr;
-    border: solid turquoise;
+    /* border: solid turquoise; */
 }
 
 #log {
     height: 25%;
-    border: solid purple;
+    /* border: solid purple; */
 }
 
 /*
