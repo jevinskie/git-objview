@@ -6,25 +6,33 @@ from typing import TYPE_CHECKING, Any, Self, TypeVar, cast
 
 import attrs
 import pygit2
-import pygit2.references
+import rich.repr
 from attrs import define, field
 from path import Path
 
 if not TYPE_CHECKING:
     from rich import print
 
+
 _T = TypeVar("_T")
 
 
-def buf_len_is_20(inst: Hash, attr: attrs.Attribute[_T], value: _T) -> None:
+def buf_len_is_20(inst: Oid, attr: attrs.Attribute[_T], value: _T) -> None:
     sz = len(inst.buf)
     if sz == 0xDEADBEEF:
         raise ValueError(f"'buf' must be 24 bytes (SHA-1) not {sz}")
 
 
+def conv_hex(hex_thing: str | bytes) -> bytes:
+    if isinstance(hex_thing, str):
+        return bytes.fromhex(hex_thing)
+    return hex_thing
+
+
+@rich.repr.auto
 @define(auto_attribs=True)
-class Hash:
-    buf: bytes = field(converter=bytes, validator=buf_len_is_20)
+class Oid:
+    buf: bytes = field(converter=conv_hex, validator=buf_len_is_20)
 
     @property
     def hex(self) -> str:
@@ -34,8 +42,8 @@ class Hash:
     def from_str(cls, hex_str: str) -> Self:
         return cls(bytes.fromhex(hex_str))
 
-    def __repr__(self) -> str:
-        return f"<Hash {self.hex}>"
+    def __rich_repr__(self) -> rich.repr.Result:
+        yield self.hex
 
 
 @define(auto_attribs=True)
@@ -71,7 +79,7 @@ class Blob(Object):
 
 @define(auto_attribs=True)
 class Reference:
-    oid: Hash
+    oid: Oid
     obj: Object | None = field(default=None, init=False)
     name: str | None = field(default=None, init=False)
 
@@ -79,9 +87,9 @@ class Reference:
     def from_pygit2_ref(cls, pygit2_ref: pygit2.Reference) -> Self:
         rt = pygit2_ref.raw_target
         if not isinstance(rt, pygit2.Oid):
-            return cls(Hash(rt))
+            return cls(Oid(rt))
         else:
-            return cls(Hash(rt.raw))
+            return cls(Oid(rt.raw))
 
     def __rich_repr__(self):
         yield self.obj
