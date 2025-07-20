@@ -25,6 +25,7 @@ classifiers = [
   "Programming Language :: Python :: 3.11"
 ]
 dependencies = [
+  "anytree>=2.13.0",
   "attrs>=25.3.0",
   "gitdb>=4.0.12",
   "path>=17.1.0",
