@@ -3,7 +3,7 @@ from typing import ClassVar
 from path import Path
 from textual import events
 from textual.app import App, ComposeResult
-from textual.containers import Vertical
+from textual.containers import Container
 from textual.widgets import (
     Footer,
     Label,
@@ -36,8 +36,8 @@ class GitObjViewApp(App):
         self._last_esc_time = None
 
     def compose(self) -> ComposeResult:
-        with Vertical(id="main"):
-            yield Footer()
+        with Container(id="main"):
+            yield Footer(id="ftr")
             with TabbedContent(initial="refs", id="browser"):
                 with TabPane("References", id="refs"):
                     yield Label("refs go here", classes="bview")
