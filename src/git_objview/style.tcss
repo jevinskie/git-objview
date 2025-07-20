@@ -2,10 +2,6 @@ Screen {
     layout: vertical;
 }
 
-#hdr {
-    min-height: 3;
-    border: solid green;
-}
 /*
 .bview {
     height: 100%;

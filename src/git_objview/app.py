@@ -35,7 +35,6 @@ class GitObjViewApp(App):
     def compose(self) -> ComposeResult:
         with Vertical(id="main"):
             yield Footer()
-            # yield Header(show_clock=True, id="hdr")
             with TabbedContent(initial="refs", id="browser"):
                 with TabPane("References", id="refs"):
                     yield Label("refs go here", classes="bview")
