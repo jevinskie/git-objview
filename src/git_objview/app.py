@@ -1,10 +1,12 @@
+from typing import ClassVar
+
 from path import Path
 from textual import events
 from textual.app import App, ComposeResult
 from textual.containers import Vertical
 from textual.widgets import (
-    Header,
-    Placeholder,
+    Footer,
+    Label,
     RichLog,
     TabbedContent,
     TabPane,
@@ -16,6 +18,12 @@ DEFAULT_ESC_DOUBLE_TAP_MAX_TIME: float = 0.4
 class GitObjViewApp(App):
     CSS_PATH = "style.tcss"
     TITLE = "git-objview"
+    BINDINGS: ClassVar = [
+        ("r", "show_tab('refs')", "References"),
+        ("o", "show_tab('objs')", "Objects"),
+        ("t", "show_tab('tres')", "Trees"),
+        ("q", "quit()", "Quit"),
+    ]
 
     _last_esc_time: float | None
 
@@ -26,21 +34,26 @@ class GitObjViewApp(App):
 
     def compose(self) -> ComposeResult:
         with Vertical(id="main"):
-            yield Header(show_clock=True, id="hdr")
-            with TabbedContent(id="browser"):
+            yield Footer()
+            # yield Header(show_clock=True, id="hdr")
+            with TabbedContent(initial="refs", id="browser"):
                 with TabPane("References", id="refs"):
-                    yield Placeholder("refs go here")
+                    yield Label("refs go here", classes="bview")
                 with TabPane("Objects", id="objs"):
-                    yield Placeholder("objs go here")
+                    yield Label("objs go here", classes="bview")
                 with TabPane("Commits", id="cmts"):
-                    yield Placeholder("cmts go here")
+                    yield Label("cmts go here", classes="bview")
                 with TabPane("Trees", id="tres"):
-                    yield Placeholder("tres go here")
+                    yield Label("tres go here", classes="bview")
                 with TabPane("Blobs", id="blbs"):
-                    yield Placeholder("blbs go here")
+                    yield Label("blbs go here", classes="bview")
                 with TabPane("Tags", id="tags"):
-                    yield Placeholder("tags go here")
+                    yield Label("tags go here", classes="bview")
         yield RichLog(id="log")
+
+    def action_show_tab(self, tab: str) -> None:
+        """Switch to a new tab."""
+        self.get_child_by_type(TabbedContent).active = tab
 
     def do_exit(self, message: str = "<> HAVE <> A <> GREAT <> DAY <>") -> None:
         self.exit(None, 0, message)

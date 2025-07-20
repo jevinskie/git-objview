@@ -6,6 +6,10 @@ Screen {
     min-height: 3;
     border: solid green;
 }
+/*
+.bview {
+    height: 100%;
+} */
 
 #browser {
     height: 100%;
