@@ -1,7 +1,6 @@
 [build-system]
 build-backend = "setuptools.build_meta"
-# requires = ["setuptools>=80.9.0", "setuptools-scm>=8.3.1"]
-requires = ["setuptools-scm>=8.3.1"]
+requires = ["setuptools>=80.9.0", "setuptools-scm>=8.3.1"]
 
 [dependency-groups]
 dev = [
@@ -68,7 +67,7 @@ extend-select = ["I", "PERF", "RUF", "FA", "UP"]
 package-dir = {"" = "src"}
 
 [tool.setuptools.package-data]
-"git_objview" = ["data/*.tcss"]
+"git_objview" = ["assets/*.tcss"]
 
 [tool.setuptools_scm]
 version_file = "src/git_objview/_version.py"
