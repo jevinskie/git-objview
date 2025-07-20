@@ -25,7 +25,10 @@ keywords = ["git", "gitdb", "git-objects", "git browse"]
 license = {text = "BSD-2-Clause"}
 name = "git-objview"
 readme = {file = 'README.md', content-type = 'text/markdown'}
-requires-python = ">=3.11"
+requires-python = ">=3.11"  # for PyPy (and GraalPy I guess) compat
+
+[project.scripts]
+git-objview = "git_objview.tools.git_objview_util:main"
 
 [project.urls]
 repository = "https://github.com/jevinskie/git-objview"
