@@ -7,6 +7,7 @@ from textual.containers import Container
 from textual.widgets import (
     Footer,
     Label,
+    Placeholder,
     RichLog,
     TabbedContent,
     TabPane,
@@ -36,21 +37,23 @@ class GitObjViewApp(App):
         self._last_esc_time = None
 
     def compose(self) -> ComposeResult:
+        W = Label
+        W = Placeholder
         with Container(id="main"):
             yield Footer(id="ftr")
             with TabbedContent(initial="refs", id="browser"):
                 with TabPane("References", id="refs"):
-                    yield Label("refs go here", classes="bview")
+                    yield W("refs go here", classes="bview")
                 with TabPane("Objects", id="objs"):
-                    yield Label("objs go here", classes="bview")
+                    yield W("objs go here", classes="bview")
                 with TabPane("Commits", id="cmts"):
-                    yield Label("cmts go here", classes="bview")
+                    yield W("cmts go here", classes="bview")
                 with TabPane("Trees", id="tres"):
-                    yield Label("tres go here", classes="bview")
+                    yield W("tres go here", classes="bview")
                 with TabPane("Blobs", id="blbs"):
-                    yield Label("blbs go here", classes="bview")
+                    yield W("blbs go here", classes="bview")
                 with TabPane("Tags", id="tags"):
-                    yield Label("tags go here", classes="bview")
+                    yield W("tags go here", classes="bview")
         yield RichLog(id="log")
 
     def action_show_tab(self, tab: str) -> None:
