@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from abc import abstractmethod
 from collections.abc import Iterable
 from typing import TYPE_CHECKING
 
@@ -13,11 +14,13 @@ if not TYPE_CHECKING:
 
 @define(auto_attribs=True)
 class Object:
+    @abstractmethod
     def children(self) -> Iterable[Object]:
-        return tuple()
+        raise NotImplementedError("Object.children()")
 
+    @abstractmethod
     def parents(self) -> Iterable[Object]:
-        return tuple()
+        raise NotImplementedError("Object.parents()")
 
 
 @define(auto_attribs=True)
@@ -56,3 +59,7 @@ class Repo:
     def dump(self) -> None:
         for oid in self.repo.odb:
             print(f"oid: {oid}")
+
+
+if __name__ == "__main__":
+    print(f"executing: {__file__}")
