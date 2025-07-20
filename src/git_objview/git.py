@@ -99,7 +99,7 @@ class JReference:
         else:
             return cls(JOid(rt.raw))
 
-    def __rich_repr__(self):
+    def __rich_repr__(self) -> rich.repr.Result:
         yield self.obj
 
 
