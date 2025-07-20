@@ -3,7 +3,6 @@ Screen {
 }
 
 #hdr {
-    height: auto;
     min-height: 3;
     border: solid green;
 }
@@ -14,11 +13,13 @@ Screen {
 }
 
 #main {
-    height: 70vh;
+    height: 3fr;
+    /* height: 70vh; */
     border: solid blue;
 }
 
 #log {
+    height: 1fr;
     /* height: 30%; */
     border: solid purple;
 }
