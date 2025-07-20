@@ -14,12 +14,10 @@ Screen {
 
 #main {
     height: 3fr;
-    /* height: 70vh; */
     border: solid blue;
 }
 
 #log {
     height: 1fr;
-    /* height: 30%; */
     border: solid purple;
 }
