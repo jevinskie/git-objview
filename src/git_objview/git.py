@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from collections.abc import Iterable
 from typing import TYPE_CHECKING
 
 import pygit2
@@ -12,7 +13,11 @@ if not TYPE_CHECKING:
 
 @define(auto_attribs=True)
 class Object:
-    pass
+    def children(self) -> Iterable[Object]:
+        return tuple()
+
+    def parents(self) -> Iterable[Object]:
+        return tuple()
 
 
 @define(auto_attribs=True)
