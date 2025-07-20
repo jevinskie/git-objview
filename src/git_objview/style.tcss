@@ -1,0 +1,18 @@
+Screen {
+    layout: vertical;
+}
+
+#hdr {
+    /* height: 1fr; */
+    border: solid green;
+}
+
+#main {
+    height: 70%;
+    border: solid blue;
+}
+
+#log {
+    height: 30%;
+    border: solid purple;
+}

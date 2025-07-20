@@ -1,16 +1,20 @@
 from path import Path
 from textual import events
 from textual.app import App, ComposeResult
-from textual.containers import Horizontal, Vertical
-from textual.widgets import Footer, Header, RichLog, Static, Tree
+from textual.widgets import (
+    Header,
+    Placeholder,
+    RichLog,
+    TabbedContent,
+    TabPane,
+)
 
 DEFAULT_ESC_DOUBLE_TAP_MAX_TIME: float = 0.4
 
 
 class GitObjViewApp(App):
-    CSS = """
-    Screen { align: center middle; }
-    """
+    CSS_PATH = "style.tcss"
+    TITLE = "git-objview"
 
     _last_esc_time: float | None
 
@@ -20,16 +24,21 @@ class GitObjViewApp(App):
         self._last_esc_time = None
 
     def compose(self) -> ComposeResult:
-        yield Header()
-        yield RichLog()
-        with Horizontal():
-            with Vertical(classes="column"):
-                yield RichLog()
-                yield Static("Two")
-            with Vertical(classes="column"):
-                yield Static("Three")
-                yield Tree("treez")
-        yield Footer()
+        yield Header(show_clock=True, id="hdr")
+        with TabbedContent(id="main"):
+            with TabPane("References", id="refs"):
+                yield Placeholder("refs go here")
+            with TabPane("Objects", id="objs"):
+                yield Placeholder("objs go here")
+            with TabPane("Commits", id="cmts"):
+                yield Placeholder("cmts go here")
+            with TabPane("Trees", id="tres"):
+                yield Placeholder("tres go here")
+            with TabPane("Blobs", id="blbs"):
+                yield Placeholder("blbs go here")
+            with TabPane("Tags", id="tags"):
+                yield Placeholder("tags go here")
+        yield RichLog(id="log")
 
     def do_exit(self, message: str = "<> HAVE <> A <> GREAT <> DAY <>") -> None:
         self.exit(None, 0, message)
