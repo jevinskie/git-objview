@@ -14,6 +14,7 @@ from textual.widgets import (
     RichLog,
     TabbedContent,
     TabPane,
+    Tree,
 )
 
 DEFAULT_ESC_DOUBLE_TAP_MAX_TIME: float = 0.4
@@ -48,7 +49,7 @@ class GitObjViewApp(App):
             with Container(id="main"):
                 with TabbedContent(initial="refs", id="browser"):
                     with TabPane("References", id="refs"):
-                        yield W("refs go here", classes="bview")
+                        yield Tree("refs go here", classes="bview")
                     with TabPane("Objects", id="objs"):
                         yield W("objs go here", classes="bview")
                     with TabPane("Commits", id="cmts"):
@@ -58,7 +59,8 @@ class GitObjViewApp(App):
                     with TabPane("Blobs", id="blbs"):
                         yield W("blbs go here", classes="bview")
                     with TabPane("Tags", id="tags"):
-                        yield W("tags go here", classes="bview")
+                        with W("tags go here", classes="bview") as t:
+                            yield t
                 yield W("content goes here", id="content")
         yield RichLog(id="log")
 
