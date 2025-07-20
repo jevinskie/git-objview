@@ -3,16 +3,22 @@ Screen {
 }
 
 #hdr {
-    /* height: 1fr; */
+    height: auto;
+    min-height: 3;
     border: solid green;
 }
 
+#browser {
+    height: 100%;
+    border: solid red;
+}
+
 #main {
-    height: 70%;
+    height: 70vh;
     border: solid blue;
 }
 
 #log {
-    height: 30%;
+    /* height: 30%; */
     border: solid purple;
 }
