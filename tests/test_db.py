@@ -1,6 +1,6 @@
-from git_objview.git import Repo
+from git_objview.git import JRepo
 
 
 def test_import_repodb():
-    rdb = Repo(".")
+    rdb = JRepo(".")
     assert str(rdb.path) == "."

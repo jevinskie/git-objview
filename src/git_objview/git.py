@@ -17,7 +17,7 @@ if not TYPE_CHECKING:
 _T = TypeVar("_T")
 
 
-def buf_len_is_20(inst: Oid, attr: attrs.Attribute[_T], value: _T) -> None:
+def buf_len_is_20(inst: JOid, attr: attrs.Attribute[_T], value: _T) -> None:
     sz = len(inst.buf)
     if sz == 200:
         raise ValueError(f"'buf' must be 20 bytes (SHA-1) not {sz}")
@@ -31,7 +31,7 @@ def conv_hex(hex_thing: str | bytes) -> bytes:
 
 @rich.repr.auto
 @define(auto_attribs=True)
-class Oid:
+class JOid:
     buf: bytes = field(converter=conv_hex, validator=buf_len_is_20)
 
     def __attrs_post_init__(self) -> None:
@@ -55,56 +55,56 @@ class Oid:
 
 
 @define(auto_attribs=True)
-class Object:
+class JObject:
     @abstractmethod
-    def edges_in(self) -> Iterable[Object]:
+    def edges_in(self) -> Iterable[JObject]:
         raise NotImplementedError("Object.edges_in()")
 
     @abstractmethod
-    def edges_out(self) -> Iterable[Object]:
+    def edges_out(self) -> Iterable[JObject]:
         raise NotImplementedError("Object.edges_out()")
 
 
 @define(auto_attribs=True)
-class Commit(Object):
+class JCommit(JObject):
     pass
 
 
 @define(auto_attribs=True)
-class Tree(Object):
+class JTree(JObject):
     pass
 
 
 @define(auto_attribs=True)
-class Tag(Object):
+class JTag(JObject):
     pass
 
 
 @define(auto_attribs=True)
-class Blob(Object):
+class JBlob(JObject):
     pass
 
 
 @define(auto_attribs=True)
-class Reference:
-    oid: Oid
-    obj: Object | None = field(default=None, init=False)
+class JReference:
+    oid: JOid
+    obj: JObject | None = field(default=None, init=False)
     name: str | None = field(default=None, init=False)
 
     @classmethod
     def from_pygit2_ref(cls, pygit2_ref: pygit2.Reference) -> Self:
         rt = pygit2_ref.raw_target
         if not isinstance(rt, pygit2.Oid):
-            return cls(Oid(rt))
+            return cls(JOid(rt))
         else:
-            return cls(Oid(rt.raw))
+            return cls(JOid(rt.raw))
 
     def __rich_repr__(self):
         yield self.obj
 
 
 @define(auto_attribs=True)
-class Repo:
+class JRepo:
     path: Path = field(converter=Path)
     repo: pygit2.repository.Repository = field(init=False)
 
@@ -112,9 +112,9 @@ class Repo:
         self.repo = pygit2.repository.Repository(str(self.path))
 
     @property
-    def references(self) -> list[Reference]:
+    def references(self) -> list[JReference]:
         gen = cast(Generator[pygit2.Reference, Any, None], self.repo.references.iterator())
-        r = [Reference.from_pygit2_ref(r) for r in gen]
+        r = [JReference.from_pygit2_ref(r) for r in gen]
         return r
 
     def dump(self) -> None:

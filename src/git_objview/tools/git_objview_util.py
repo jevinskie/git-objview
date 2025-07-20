@@ -6,7 +6,7 @@ from typing import TYPE_CHECKING
 from path import Path
 
 from git_objview.app import GitObjViewApp
-from git_objview.git import Repo
+from git_objview.git import JRepo
 
 if not TYPE_CHECKING:
     from rich import print
@@ -18,7 +18,7 @@ def real_main(args: argparse.Namespace):
         app = GitObjViewApp(git_repo_path=args.repo)
         app.run()
     else:
-        repo = Repo(args.repo)
+        repo = JRepo(args.repo)
         print(repo)
         repo.dump()
         print("repo dump done")
