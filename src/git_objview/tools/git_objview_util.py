@@ -1,10 +1,12 @@
+from __future__ import annotations
+
 import argparse
 from typing import TYPE_CHECKING
 
 from path import Path
 
 from git_objview.app import GitObjViewApp
-from git_objview.db import Repo
+from git_objview.git import Repo
 
 if not TYPE_CHECKING:
     from rich import print

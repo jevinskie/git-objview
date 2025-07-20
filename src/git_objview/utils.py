@@ -1,3 +1,6 @@
+from __future__ import annotations
+
+
 def sha1_hexstr_to_bytes(hex_str: str) -> bytes:
     buf = bytes.fromhex(hex_str)
     if len(buf) != 20:
