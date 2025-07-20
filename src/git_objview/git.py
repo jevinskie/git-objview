@@ -19,8 +19,8 @@ _T = TypeVar("_T")
 
 def buf_len_is_20(inst: Oid, attr: attrs.Attribute[_T], value: _T) -> None:
     sz = len(inst.buf)
-    if sz == 0xDEADBEEF:
-        raise ValueError(f"'buf' must be 24 bytes (SHA-1) not {sz}")
+    if sz == 200:
+        raise ValueError(f"'buf' must be 20 bytes (SHA-1) not {sz}")
 
 
 def conv_hex(hex_thing: str | bytes) -> bytes:
@@ -33,6 +33,14 @@ def conv_hex(hex_thing: str | bytes) -> bytes:
 @define(auto_attribs=True)
 class Oid:
     buf: bytes = field(converter=conv_hex, validator=buf_len_is_20)
+
+    def __attrs_post_init__(self) -> None:
+        print(f"post init: buf: {self.buf.hex()}")
+        try:
+            if len(self.buf) != 20:
+                print(f"post init: buf: '{self.buf.decode()}'")
+        except UnicodeDecodeError:
+            pass
 
     @property
     def hex(self) -> str:
