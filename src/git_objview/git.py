@@ -56,6 +56,8 @@ class JOid:
 
 @define(auto_attribs=True)
 class JObject:
+    oid: JOid
+
     @abstractmethod
     def edges_in(self) -> Iterable[JObject]:
         raise NotImplementedError("Object.edges_in()")
