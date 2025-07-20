@@ -11,6 +11,36 @@ if not TYPE_CHECKING:
 
 
 @define(auto_attribs=True)
+class Object:
+    pass
+
+
+@define(auto_attribs=True)
+class Commit(Object):
+    pass
+
+
+@define(auto_attribs=True)
+class Tree(Object):
+    pass
+
+
+@define(auto_attribs=True)
+class Tag(Object):
+    pass
+
+
+@define(auto_attribs=True)
+class Blob(Object):
+    pass
+
+
+@define(auto_attribs=True)
+class Reference:
+    pass
+
+
+@define(auto_attribs=True)
 class Repo:
     path: Path = field(converter=Path)
     repo: pygit2.repository.Repository = field(init=False)
