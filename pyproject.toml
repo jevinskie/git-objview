@@ -1,0 +1,44 @@
+[build-system]
+# build-backend = "setuptools.build_meta"
+requires = ["setuptools-scm>=8.3.1"]
+
+[project]
+authors = [
+  {name = "Jevin Sweval", email = "jevinsweval@gmail.com"}
+]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.15",
+  "Programming Language :: Python :: 3.14",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.12"
+]
+dependencies = [
+  "gitdb>=4.0.12",
+  "path>=17.1.0",
+  "textual>=4.0.0"
+]
+description = "TUI git object viewer - think Midnight Commander or exa"
+dynamic = ["version"]
+keywords = ["git", "gitdb", "git-objects", "git browse"]
+license = {text = "BSD-2-Clause"}
+name = "git-objview"
+readme = {file = 'README.md', content-type = 'text/markdown'}
+requires-python = ">=3.11"
+
+[project.urls]
+repository = "https://github.com/jevinskie/git-objview"
+
+[tool.ruff]
+line-length = 100
+preview = true
+required-version = ">=0.12"
+show-fixes = true
+unsafe-fixes = true
+
+[tool.ruff.lint]
+extend-select = ["I", "PERF", "RUF", "FA", "UP"]
+
+[tool.setuptools_scm]
+version_file = "src/git_objview/_version.py"

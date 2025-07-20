@@ -1,0 +1,61 @@
+# Note the order is intentional to avoid multiple passes of the hooks
+# Portions from https://github.com/angr/pypcode/blob/master/.pre-commit-config.yaml
+minimum_pre_commit_version: 4.2.0
+repos:
+- repo: meta
+  hooks:
+  - id: check-hooks-apply
+  - id: check-useless-excludes
+- repo: https://github.com/abravalheri/validate-pyproject
+  rev: v0.24.1
+  hooks:
+  - id: validate-pyproject
+    fail_fast: true
+- repo: https://github.com/astral-sh/uv-pre-commit
+  rev: 0.8.0
+  hooks:
+  - id: uv-lock
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v5.0.0
+  hooks:
+  - id: check-added-large-files
+    args: [--maxkb, '10240']
+  - id: check-merge-conflict
+    fail_fast: true
+  - id: check-case-conflict
+    fail_fast: true
+  - id: destroyed-symlinks
+    fail_fast: true
+  - id: check-shebang-scripts-are-executable
+  - id: check-yaml
+  - id: check-toml
+  - id: check-vcs-permalinks
+  - id: detect-private-key
+    fail_fast: true
+  - id: end-of-file-fixer
+  - id: mixed-line-ending
+    args: [--fix=lf]
+  - id: fix-byte-order-marker
+  - id: trailing-whitespace
+    args: [--markdown-linebreak-ext=md]
+- repo: https://github.com/macisamuele/language-formatters-pre-commit-hooks
+  rev: v2.15.0
+  hooks:
+  - id: pretty-format-yaml
+    args: [--autofix, --indent, '2']
+  - id: pretty-format-toml
+    args: [--autofix]
+- repo: https://github.com/astral-sh/ruff-pre-commit
+  rev: v0.12.4
+  hooks:
+  - id: ruff-check
+    args: [--fix, --exit-non-zero-on-fix, --show-fixes]
+  - id: ruff-format
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v5.0.0
+  hooks:
+  - id: mixed-line-ending
+    args: [--fix=lf]
+  - id: trailing-whitespace
+    args: [--markdown-linebreak-ext=md]
+  - id: end-of-file-fixer
