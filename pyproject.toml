@@ -27,7 +27,6 @@ classifiers = [
 dependencies = [
   "attrs>=25.3.0",
   "gitdb>=4.0.12",
-  "importlib-resources>=6.5.2",
   "path>=17.1.0",
   "pygit2>=1.18.0",
   "rich>=14.0.0",
