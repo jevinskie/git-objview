@@ -21,7 +21,10 @@ class GitObjViewApp(App):
     BINDINGS: ClassVar = [
         ("r", "show_tab('refs')", "References"),
         ("o", "show_tab('objs')", "Objects"),
+        ("c", "show_tab('cmts')", "Commits"),
         ("t", "show_tab('tres')", "Trees"),
+        ("b", "show_tab('blbs')", "Blobs"),
+        ("a", "show_tab('tags')", "Tags"),
         ("q", "quit()", "Quit"),
     ]
 
@@ -52,7 +55,7 @@ class GitObjViewApp(App):
 
     def action_show_tab(self, tab: str) -> None:
         """Switch to a new tab."""
-        self.get_child_by_type(TabbedContent).active = tab
+        self.get_child_by_id("main").get_child_by_id("browser").active = tab
 
     def do_exit(self, message: str = "<> HAVE <> A <> GREAT <> DAY <>") -> None:
         self.exit(None, 0, message)
