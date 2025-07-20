@@ -1,7 +1,7 @@
 import argparse
+from typing import TYPE_CHECKING
 
 from path import Path
-from pygit2 import TYPE_CHECKING
 
 from git_objview.app import GitObjViewApp
 from git_objview.db import Repo
@@ -18,6 +18,8 @@ def real_main(args: argparse.Namespace):
     else:
         repo = Repo(args.repo)
         print(repo)
+        repo.dump()
+        print("repo dump done")
 
 
 def get_arg_parser() -> argparse.ArgumentParser:
