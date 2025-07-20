@@ -1,4 +1,6 @@
-def test_import_repodb():
-    from git_objview.db import RepoDB
+from git_objview.db import RepoDB
 
-    assert RepoDB
+
+def test_import_repodb():
+    rdb = RepoDB(".")
+    assert str(rdb.path) == "."

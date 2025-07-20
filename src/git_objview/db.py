@@ -4,4 +4,4 @@ from path import Path
 
 @define(auto_attribs=True)
 class RepoDB:
-    path: Path = field()
+    path: Path = field(converter=Path)
