@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from abc import abstractmethod
 from collections.abc import Generator, Iterable
+from enum import Enum, auto
 from typing import TYPE_CHECKING, Any, Self, TypeVar, cast
 
 import attrs
@@ -89,17 +90,30 @@ class JBlob(JObject):
 
 @define(auto_attribs=True)
 class JReference:
+    class JReferenceType(Enum):
+        DIRECT = auto()
+        SYMBOLIC = auto()
+
+        @classmethod
+        def from_pygit2(cls, pygit2_ref_ty: pygit2.enums.ReferenceType):
+            match pygit2_ref_ty:
+                case pygit2.enums.ReferenceType.DIRECT:
+                    return cls.DIRECT
+                case pygit2.enums.ReferenceType.SYMBOLIC:
+                    return cls.SYMBOLIC
+                case _:
+                    raise ValueError(f"Unhandled pygit2 ReferenceType: {pygit2_ref_ty}")
+
     oid: JOid
     obj: JObject | None = field(default=None, init=False)
     name: str | None = field(default=None, init=False)
+    typ: JReferenceType
 
     @classmethod
     def from_pygit2_ref(cls, pygit2_ref: pygit2.Reference) -> Self:
-        rt = pygit2_ref.raw_target
-        if not isinstance(rt, pygit2.Oid):
-            return cls(JOid(rt))
-        else:
-            return cls(JOid(rt.raw))
+        real_ref = pygit2_ref.resolve()
+        assert isinstance(real_ref.raw_target, bytes)
+        return cls(JOid(real_ref.raw_target), cls.JReferenceType.from_pygit2(pygit2_ref.type))
 
     def __rich_repr__(self) -> rich.repr.Result:
         yield self.obj
