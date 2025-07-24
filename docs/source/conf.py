@@ -37,6 +37,7 @@ extensions = [
     "sphinx.ext.doctest",
     "sphinx.ext.intersphinx",
     "sphinx.ext.viewcode",
+    "sphinx.ext.napoleon",
     "sphinx_immaterial",
     # "sphinx_rtd_theme",
 ]

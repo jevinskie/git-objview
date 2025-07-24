@@ -33,6 +33,8 @@ def conv_hex(hex_thing: str | bytes) -> bytes:
 @rich.repr.auto
 @define(auto_attribs=True)
 class JOid:
+    """Git object ID"""
+
     buf: bytes = field(converter=conv_hex, validator=buf_len_is_20)
 
     def __attrs_post_init__(self) -> None:
@@ -57,6 +59,8 @@ class JOid:
 
 @define(auto_attribs=True)
 class JObject:
+    """Git object"""
+
     oid: JOid
 
     @abstractmethod
@@ -70,27 +74,39 @@ class JObject:
 
 @define(auto_attribs=True)
 class JCommit(JObject):
+    """Commit object"""
+
     pass
 
 
 @define(auto_attribs=True)
 class JTree(JObject):
+    """Tree object"""
+
     pass
 
 
 @define(auto_attribs=True)
 class JTag(JObject):
+    """Tag object"""
+
     pass
 
 
 @define(auto_attribs=True)
 class JBlob(JObject):
+    """Blob object"""
+
     pass
 
 
 @define(auto_attribs=True)
 class JReference:
+    """Git reference"""
+
     class JReferenceType(Enum):
+        """Git reference type enum"""
+
         DIRECT = auto()
         SYMBOLIC = auto()
 
@@ -105,6 +121,7 @@ class JReference:
                     raise ValueError(f"Unhandled pygit2 ReferenceType: {pygit2_ref_ty}")
 
     oid: JOid
+    """Oid of the reference"""
     obj: JObject | None = field(default=None, init=False)
     name: str | None = field(default=None, init=False)
     typ: JReferenceType
@@ -121,6 +138,8 @@ class JReference:
 
 @define(auto_attribs=True)
 class JRepo:
+    """Git repository"""
+
     path: Path = field(converter=Path)
     repo: pygit2.repository.Repository = field(init=False)
 
@@ -140,7 +159,3 @@ class JRepo:
         print("refs:")
         for i, ref in enumerate(self.references):
             print(f"ref[{i}]: {ref}")
-
-
-if __name__ == "__main__":
-    print(f"executing: {__file__}")
