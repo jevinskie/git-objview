@@ -11,6 +11,12 @@ dev = [
   "pytest-sugar>=1.0.0",
   "textual-dev>=1.7.0"
 ]
+docs = [
+  "furo>=2025.7.19",
+  "sphinx>=8.2.3",
+  "sphinx-lint>=1.0.0",
+  "sphinx-rtd-theme>=3.0.2"
+]
 
 [project]
 authors = [
