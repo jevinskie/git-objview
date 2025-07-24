@@ -6,7 +6,10 @@ dist/
 wheels/
 *.egg-info
 src/git_objview/_version.py
-docs/_build/
+docs/build/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
 
 # Python version
 .python-version
