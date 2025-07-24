@@ -45,6 +45,10 @@ repos:
     args: [--autofix, --indent, '2']
   - id: pretty-format-toml
     args: [--autofix]
+- repo: https://github.com/sphinx-contrib/sphinx-lint
+  rev: 688bef9c9500aa75dc33b0ffc064de8753d56819
+  hooks:
+  - id: sphinx-lint
 - repo: https://github.com/astral-sh/ruff-pre-commit
   rev: v0.12.4
   hooks:
