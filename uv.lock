@@ -474,8 +474,8 @@ requires-dist = [
     { name = "gitdb", specifier = ">=4.0.12" },
     { name = "path", specifier = ">=17.1.0" },
     { name = "pygit2", specifier = ">=1.18.0" },
-    { name = "rich", specifier = ">=14.0.0" },
-    { name = "textual", specifier = ">=4.0.0" },
+    { name = "rich", specifier = ">=14.1.0" },
+    { name = "textual", specifier = ">=5.0.1" },
 ]
 
 [package.metadata.requires-dev]

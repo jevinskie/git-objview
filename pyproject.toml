@@ -39,8 +39,8 @@ dependencies = [
   "gitdb>=4.0.12",
   "path>=17.1.0",
   "pygit2>=1.18.0",
-  "rich>=14.0.0",
-  "textual>=4.0.0"
+  "rich>=14.1.0",
+  "textual>=5.0.1"
 ]
 description = "TUI git object viewer - think Midnight Commander or exa"
 dynamic = ["version"]
