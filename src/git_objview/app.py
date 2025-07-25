@@ -67,8 +67,7 @@ class GitObjViewApp(App):
                     with TabPane("Blobs", id="blbs"):
                         yield W("blbs go here", classes="bview")
                     with TabPane("Tags", id="tags"):
-                        with W("tags go here", classes="bview") as t:
-                            yield t
+                        yield W("tags go here", classes="bview")
                 yield W("content goes here", id="content")
         yield RichLog(id="log")
 
