@@ -40,7 +40,8 @@ dependencies = [
   "path>=17.1.0",
   "pygit2>=1.18.0",
   "rich>=14.1.0",
-  "textual>=5.0.1"
+  "textual>=5.0.1",
+  "textual-speedups"
 ]
 description = "TUI git object viewer - think Midnight Commander or exa"
 dynamic = ["version"]
@@ -80,3 +81,6 @@ package-dir = {"" = "src"}
 
 [tool.setuptools_scm]
 version_file = "src/git_objview/_version.py"
+
+[tool.uv.sources]
+textual-speedups = {git = "https://github.com/willmcgugan/textual-speedups"}

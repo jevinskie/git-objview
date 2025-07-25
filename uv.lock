@@ -447,6 +447,7 @@ dependencies = [
     { name = "pygit2" },
     { name = "rich" },
     { name = "textual" },
+    { name = "textual-speedups" },
 ]
 
 [package.dev-dependencies]
@@ -476,6 +477,7 @@ requires-dist = [
     { name = "pygit2", specifier = ">=1.18.0" },
     { name = "rich", specifier = ">=14.1.0" },
     { name = "textual", specifier = ">=5.0.1" },
+    { name = "textual-speedups", git = "https://github.com/willmcgugan/textual-speedups" },
 ]
 
 [package.metadata.requires-dev]
@@ -1604,6 +1606,11 @@ sdist = { url = "https://files.pythonhosted.org/packages/27/41/09d5695b050d592ff
 wheels = [
     { url = "https://files.pythonhosted.org/packages/7c/fb/0006f86960ab8a2f69c9f496db657992000547f94f53a2f483fd611b4bd2/textual_serve-1.1.2-py3-none-any.whl", hash = "sha256:147d56b165dccf2f387203fe58d43ce98ccad34003fe3d38e6d2bc8903861865", size = 447326, upload-time = "2025-04-16T12:11:43.176Z" },
 ]
+
+[[package]]
+name = "textual-speedups"
+version = "0.2.0"
+source = { git = "https://github.com/willmcgugan/textual-speedups#883645c8ec7a6fc97fcf6b79c849dcf044e26388" }
 
 [[package]]
 name = "traitlets"
