@@ -24,9 +24,9 @@ class GitObjViewApp(App):
     CSS_PATH = "style.tcss"
     TITLE = "git-objview"
     BINDINGS: ClassVar = [
-        # ("r", "show_tab('refs')", "References"),
-        # ("o", "show_tab('objs')", "Objects"),
-        # ("c", "show_tab('cmts')", "Commits"),
+        ("r", "show_tab('refs')", "References"),
+        ("o", "show_tab('objs')", "Objects"),
+        ("c", "show_tab('cmts')", "Commits"),
         ("t", "show_tab('tres')", "Trees"),
         ("b", "show_tab('blbs')", "Blobs"),
         ("a", "show_tab('tags')", "Tags"),
@@ -47,21 +47,13 @@ class GitObjViewApp(App):
             yield Header(id="hdr")
             yield Footer(id="ftr")
             with Container(id="main"):
-                with TabbedContent(initial="blbs", id="browser"):
-                    if False:
-                        with TabPane("References", id="refs"):
-                            yield Tree("refs go here", classes="bview")
-                        with TabPane("Objects", id="objs"):
-                            yield W("objs go here", classes="bview")
-                        with TabPane("Commits", id="cmts"):
-                            yield W("cmts go here", classes="bview")
-                        with TabPane("Trees", id="tres"):
-                            yield W("tres go here", classes="bview")
-                        with TabPane("Blobs", id="blbs"):
-                            yield W("blbs go here", classes="bview")
-                        with TabPane("Tags", id="tags"):
-                            with W("tags go here", classes="bview") as t:
-                                yield t
+                with TabbedContent(initial="refs", id="browser"):
+                    with TabPane("References", id="refs"):
+                        yield Tree("refs go here", classes="bview")
+                    with TabPane("Objects", id="objs"):
+                        yield W("objs go here", classes="bview")
+                    with TabPane("Commits", id="cmts"):
+                        yield W("cmts go here", classes="bview")
                     with TabPane("Trees", id="tres"):
                         yield W("tres go here", classes="bview")
                     with TabPane("Blobs", id="blbs"):
