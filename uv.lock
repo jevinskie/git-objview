@@ -1558,7 +1558,7 @@ wheels = [
 
 [[package]]
 name = "textual"
-version = "5.0.0"
+version = "5.0.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "markdown-it-py", extra = ["linkify", "plugins"] },
@@ -1567,9 +1567,9 @@ dependencies = [
     { name = "rich" },
     { name = "typing-extensions" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/6e/7a/b1b521efced4a4212fede37afe543ba5a2108baeeea9704f6174c8d438d8/textual-5.0.0.tar.gz", hash = "sha256:44f507a1e264bab753b436c55245d8a957c348b3cada37f12a7782b5ccfbb1da", size = 1610883, upload-time = "2025-07-25T07:47:04.408Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/ca/45/44120c661037e64b80518871a800a0bd18c13aab4b68711b774f3b9d58b1/textual-5.0.1.tar.gz", hash = "sha256:c6e20489ee585ec3fa43b011aa575f52e4fafad550e040bff9f53a464897feb6", size = 1611533, upload-time = "2025-07-25T19:50:59.72Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/1c/f5/529edb21a0f03dde63a7cf3b88b000cf76d07326e60c629e5dc21f42494b/textual-5.0.0-py3-none-any.whl", hash = "sha256:7a611438e1428a2614e11bb7b2d32c4f0823ce70d400d22d7e0286d8b1a133f4", size = 699542, upload-time = "2025-07-25T07:47:02.918Z" },
+    { url = "https://files.pythonhosted.org/packages/cf/94/976d89db23efed9f3114403faf3f767ec707bfca469a93d0fb715cd352fa/textual-5.0.1-py3-none-any.whl", hash = "sha256:816eab21d22a702b3858ee23615abccaf157c05d386e82968000084c3c2c26aa", size = 699674, upload-time = "2025-07-25T19:50:57.686Z" },
 ]
 
 [[package]]
