@@ -24,12 +24,12 @@ class GitObjViewApp(App):
     CSS_PATH = "style.tcss"
     TITLE = "git-objview"
     BINDINGS: ClassVar = [
-        ("r", "show_tab('refs')", "References"),
-        ("o", "show_tab('objs')", "Objects"),
-        ("c", "show_tab('cmts')", "Commits"),
+        # ("r", "show_tab('refs')", "References"),
+        # ("o", "show_tab('objs')", "Objects"),
+        # ("c", "show_tab('cmts')", "Commits"),
         ("t", "show_tab('tres')", "Trees"),
         ("b", "show_tab('blbs')", "Blobs"),
-        ("a", "show_tab('tags')", "Tags"),
+        # ("a", "show_tab('tags')", "Tags"),
         ("q", "quit()", "Quit"),
     ]
 
@@ -47,7 +47,7 @@ class GitObjViewApp(App):
             yield Header(id="hdr")
             yield Footer(id="ftr")
             with Container(id="main"):
-                with TabbedContent(initial="refs", id="browser"):
+                with TabbedContent(initial="blbs", id="browser"):
                     if False:
                         with TabPane("References", id="refs"):
                             yield Tree("refs go here", classes="bview")
@@ -62,10 +62,11 @@ class GitObjViewApp(App):
                         with TabPane("Tags", id="tags"):
                             with W("tags go here", classes="bview") as t:
                                 yield t
-                    else:
-                        with TabPane("Blobs", id="blbs"):
-                            yield W("blbs go here", classes="bview")
-                    yield W("content goes here", id="content")
+                    with TabPane("Trees", id="tres"):
+                        yield W("tres go here", classes="bview")
+                    with TabPane("Blobs", id="blbs"):
+                        yield W("blbs go here", classes="bview")
+                yield W("content goes here", id="content")
         yield RichLog(id="log")
 
     def action_show_tab(self, tab: str) -> None:
