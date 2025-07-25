@@ -29,7 +29,7 @@ class GitObjViewApp(App):
         # ("c", "show_tab('cmts')", "Commits"),
         ("t", "show_tab('tres')", "Trees"),
         ("b", "show_tab('blbs')", "Blobs"),
-        # ("a", "show_tab('tags')", "Tags"),
+        ("a", "show_tab('tags')", "Tags"),
         ("q", "quit()", "Quit"),
     ]
 
@@ -66,6 +66,9 @@ class GitObjViewApp(App):
                         yield W("tres go here", classes="bview")
                     with TabPane("Blobs", id="blbs"):
                         yield W("blbs go here", classes="bview")
+                    with TabPane("Tags", id="tags"):
+                        with W("tags go here", classes="bview") as t:
+                            yield t
                 yield W("content goes here", id="content")
         yield RichLog(id="log")
 
